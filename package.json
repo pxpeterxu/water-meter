@@ -1,0 +1,79 @@
+{
+  "name": "water-meter",
+  "version": "1.0.0",
+  "description": "Server that runs on a C.H.I.P. computer that takes in pulses from a water meter and records the readings",
+  "main": "index.js",
+  "scripts": {
+    "b-node": "babel-node --extensions .ts,.tsx",
+    "build": "babel --extensions .ts,.tsx src --out-dir dist && cp -R src/config dist/config",
+    "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx --max-warnings 0 .",
+    "postinstall": "patch-package"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/pxpeterxu/chip-water-meter.git"
+  },
+  "author": "Peter Xu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pxpeterxu/chip-water-meter/issues"
+  },
+  "homepage": "https://github.com/pxpeterxu/chip-water-meter#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.5",
+    "@babel/node": "^7.16.8",
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/plugin-proposal-decorators": "^7.17.8",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-typescript": "^7.16.7",
+    "@types/gulp": "^4.0.9",
+    "@types/jest": "^27.4.1",
+    "@types/johnny-five": "^1.3.2",
+    "@types/node-schedule": "^1.3.2",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
+    "babel-jest": "^27.5.1",
+    "confusing-browser-globals": "^1.0.11",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-airbnb-typescript": "^9.0.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.15.1",
+    "eslint-plugin-react-hooks": "^4.1.0",
+    "patch-package": "^6.4.7",
+    "prettier": "^2.5.1",
+    "typescript": "^4.6.2"
+  },
+  "dependencies": {
+    "chip-io": "glennirwin/node-chip-io",
+    "googleapis": "^97.0.0",
+    "gulp": "^4.0.2",
+    "gulp-rsync": "^0.0.9",
+    "jest": "^27.5.1",
+    "johnny-five": "^2.1.0",
+    "mockdate": "^3.0.5",
+    "moment": "^2.29.1",
+    "node-schedule": "^2.1.0",
+    "sqlite": "^4.0.25"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.jsx$": "babel-jest",
+      "^.+\\.js$": "babel-jest",
+      "^.+\\.tsx$": "babel-jest",
+      "^.+\\.ts$": "babel-jest"
+    }
+  },
+  "resolutions": {
+    "chip-io/i2c-bus/bindings": "^1.5.0"
+  }
+}

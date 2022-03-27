@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    "alwaysStrict": true,
+    // Part of --strict
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "jsx": "react",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "noImplicitAny": true,
+    // Part of --strict
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    // Part of --strict
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    // react-native and regular Typescript types sometimes conflict: see https://github.com/DefinitelyTyped/DefinitelyTyped/issues/16825
+    "strictFunctionTypes": true,
+    // Part of --strict
+    "strictNullChecks": true,
+    // Part of --strict
+    "strictPropertyInitialization": true,
+    // Part of --strict
+    "suppressImplicitAnyIndexErrors": true,
+    "target": "esnext",
+    // "strictBindCallApply": true, // Part of --strict, disabled due to caveats in https://devblogs.microsoft.com/typescript/announcing-typescript-3-2/#strictbindcallapply
+    "incremental": true,
+    "tsBuildInfoFile": ".tsbuildinfo",
+    "baseUrl": ".",
+    "lib": ["esnext", "dom"],
+    "paths": {
+      "*": [
+        // Use our own types if we want to override anything
+        "types/*",
+        "node_modules/*"
+      ]
+    },
+    "sourceMap": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
+}
