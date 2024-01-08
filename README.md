@@ -1,30 +1,28 @@
 # Water meter reader
 
-This application runs on a C.H.I.P. (a Raspberry Pi-like computer) and will
-monitor for water meter pulses and send them to a Google Sheet.
+This application runs on a single-board computer (SBC; e.g., Raspberry Pi or
+C.H.I.P.) and will monitor for water meter pulses and send them to a Google Sheet.
 
 ## How to develop
 
-We develop the C.H.I.P. by syncing the code over to the C.H.I.P. and running
+We develop the SBC by syncing the code over to the computer and running
 everything there.
 
 ### Set up syncing
 
-1. Make sure that you and the C.H.I.P. computer are on the same network
-2. Figure out the IP address of the C.H.I.P. computer. This is often something
+1. Make sure that you and the SBC computer are on the same network
+2. Figure out the IP address of the SBC computer. This is often something
    like 192.168.0.123
-3. SSH into the C.H.I.P. using:
+3. SSH into the SBC computer using:
    ```shell
    ssh root@192.168.0.123
-   # The default password is "chip", but for devices that we've provisioned,
-   # we've changed them to "I monitor the water"
    ```
 4. Install your own certificate in authorized_keys
    ```shell
    # On your local machine
    cat ~/.ssh/id_*.pub
-   # Copy and paste that onto the C.H.I.P.
-   # On the C.H.I.P.
+   # Copy and paste that onto the SBC computer
+   # On the embedded
    mkdir -p ~/.ssh
    echo 'PASTE YOUR AUTHORIZED_KEYS HERE' >> ~/.ssh/authorized_keys
    chmod 600 ~/.ssh/authorized_keys
@@ -39,14 +37,14 @@ On your local machine, run:
 SYNC_SERVER=192.168.0.123 gulp sync
 ```
 
-This should start syncing all of your code over to the C.H.I.P.
+This should start syncing all of your code over to the SBC computer
 
-SSH into the C.H.I.P. (e.g., `ssh root@192.168.0.123`) and run any commands
+SSH into the SBC computer (e.g., `ssh root@192.168.0.123`) and run any commands
 you might need to test and install all the software.
 
 ```shell
 ssh root@192.168.0.123
-# On the C.H.I.P.
+# On the SBC computer
 cd water-meter
 bash sysadmin/install-prerequisites.sh
 yarn install
@@ -55,31 +53,26 @@ yarn jest someTest.test
 
 ## How it works
 
-In short, this software powers a C.H.I.P., which
+In short, this software powers a SBC computer, which
 
 1. Counts the number of pulses it receives from a few water meters
 2. Saves the result locally, and
 3. Once an hour, uploads it to a Google Sheet.
 
-### C.H.I.P.
+### SBC computer
 
-This device is meant to be run on a C.H.I.P., a discontinued, Raspberry Pi-like
-computer that runs on a Micro-USB power supply.
+This device is meant to be run on either a C.H.I.P. computer, a discontinued,
+Raspberry Pi-like computer, or a Raspberry Pi itself.
 
-We chose the C.H.I.P. because:
-
-- It's cheap ($9)
-- It has a built-in Wi-Fi adapter (the Raspberry Pi 2 didn't have one), and
-- Has the GPIO pins/ports needed
-
-However, it's been discontinued, so the most recent Raspberry Pis would work
-just fine. You just need to substitute out `chip-io` for `raspi-io` and re-map
-the GPIO ports.
+The Raspberry Pi will be supported long-term as it has an established ecosystem.
+C.H.I.P. was used for the initial version of this, and code is kept for
+posterity.
 
 ### Wiring and water meters
 
-The C.H.I.P. connects to water meters through regular old wires. This should be
-compatible with any water meter, but in our case, we used the following:
+The SBC computer connects to water meters through regular wires. This should be
+compatible with any water meter that emits pulses, but in our case, we used the
+following:
 
 [DAE VM-100P 1” Positive Displacement Water Meter with Pulse Output, Measuring in Gallon + Couplings](https://daecontrol.com/product/dae-vm-100p-1-positive-displacement-water-meter-with-pulse-output-measuring-in-gallon-couplings/)
 
