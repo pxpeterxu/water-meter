@@ -51,7 +51,6 @@
     "typescript": "^4.6.2"
   },
   "dependencies": {
-    "chip-io": "glennirwin/node-chip-io",
     "googleapis": "^97.0.0",
     "gulp": "^4.0.2",
     "gulp-rsync": "^0.0.9",

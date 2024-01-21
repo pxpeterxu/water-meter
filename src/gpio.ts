@@ -1,16 +1,8 @@
 import { Board, Button } from 'johnny-five';
-import ChipIO from 'chip-io';
 import { RaspiIO } from 'raspi-io';
 import { WaterMeter } from './types';
 import { incrementWaterMeterUsageByOneGallon } from './waterUsageStore';
 import { logger } from './logger';
-
-/**
- * By default, we target the Raspberry Pi. If BOARD=chip, we'll
- * target the C.H.I.P., which uses a different library and has
- * different pins
- */
-const isCHIP = process.env.BOARD === 'chip';
 
 /**
  * Start listeners for each of the water meters' GPIO ports.
@@ -84,7 +76,7 @@ async function _withReadyBoard(func: (brd: Board) => unknown) {
   if (!board) {
     logger.info('Initializing board');
     board = new Board({
-      io: isCHIP ? new ChipIO() : new RaspiIO(),
+      io: new RaspiIO(),
     });
   }
 
@@ -120,18 +112,10 @@ export async function _addButtonListener({
 /**
  * A mapping from water meters to the GPIO pins
  */
-const meterToPin: { [meter in WaterMeter]: string } = isCHIP
-  ? {
-      // See https://github.com/sandeepmistry/node-chip-io#pin-guide
-      // for a list of all available pins
-      [WaterMeter.seventy]: 'XIO-P0',
-      [WaterMeter.seventyTwo]: 'XIO-P1',
-      [WaterMeter.seventyFour]: 'XIO-P2',
-    }
-  : {
-      // See https://github.com/nebrius/raspi-io/wiki/Pin-Information
-      // for a list of all available pins
-      [WaterMeter.seventy]: 'GPIO10',
-      [WaterMeter.seventyTwo]: 'GPIO9',
-      [WaterMeter.seventyFour]: 'GPIO11',
-    };
+const meterToPin: { [meter in WaterMeter]: string } = {
+  // See https://github.com/nebrius/raspi-io/wiki/Pin-Information
+  // for a list of all available pins
+  [WaterMeter.seventy]: 'GPIO10',
+  [WaterMeter.seventyTwo]: 'GPIO9',
+  [WaterMeter.seventyFour]: 'GPIO11',
+};

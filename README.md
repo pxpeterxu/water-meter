@@ -1,7 +1,7 @@
 # Water meter reader
 
-This application runs on a single-board computer (SBC; e.g., Raspberry Pi or
-C.H.I.P.) and will monitor for water meter pulses and send them to a Google Sheet.
+This application runs on a single-board computer (SBC; just Raspberry Pi for
+now) and will monitor for water meter pulses and send them to a Google Sheet.
 
 ## How to develop
 
@@ -10,8 +10,8 @@ everything there.
 
 ### Set up syncing
 
-1. Make sure that you and the SBC computer are on the same network
-2. Figure out the IP address of the SBC computer. This is often something
+1. Make sure that you and the SBC are on the same network
+2. Figure out the IP address of the SBC. This is often something
    like 192.168.0.123
 3. SSH into the SBC computer using:
    ```shell
@@ -53,7 +53,7 @@ yarn jest someTest.test
 
 ## How it works
 
-In short, this software powers a SBC computer, which
+In short, this software powers a SBC, which
 
 1. Counts the number of pulses it receives from a few water meters
 2. Saves the result locally, and
@@ -61,12 +61,11 @@ In short, this software powers a SBC computer, which
 
 ### SBC computer
 
-This device is meant to be run on either a C.H.I.P. computer, a discontinued,
-Raspberry Pi-like computer, or a Raspberry Pi itself.
+This device is meant to be run on a Single Board Computer (Raspberry Pi).
 
 The Raspberry Pi will be supported long-term as it has an established ecosystem.
-C.H.I.P. was used for the initial version of this, and code is kept for
-posterity.
+C.H.I.P. was used for the initial version of this, but is discontinued and not
+supported so the code was remmoved.
 
 ### Wiring and water meters
 
