@@ -1,10 +1,10 @@
 import moment from 'moment';
-import { _addButtonListener } from './gpio';
+import { _addButtonListener, meterToPin } from './gpio';
 import { delay } from './promises';
 
 describe(_addButtonListener, () => {
   it('fires on button presses', async () => {
-    const pins = ['XIO-P0', 'XIO-P1', 'XIO-P2', 'XIO-P3'];
+    const pins = [meterToPin['1570'], meterToPin['1572'], meterToPin['1574']];
     await Promise.all(
       pins.map((pin) =>
         _addButtonListener({

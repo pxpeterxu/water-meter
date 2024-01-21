@@ -112,7 +112,7 @@ export async function _addButtonListener({
 /**
  * A mapping from water meters to the GPIO pins
  */
-const meterToPin: { [meter in WaterMeter]: string } = {
+export const meterToPin: { [meter in WaterMeter]: string } = {
   // See https://github.com/nebrius/raspi-io/wiki/Pin-Information
   // for a list of all available pins
   [WaterMeter.seventy]: 'GPIO10',
