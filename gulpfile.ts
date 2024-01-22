@@ -6,7 +6,6 @@ const syncGlobs = [
   './src',
   './types',
   './sysadmin',
-  './patches',
   './yarn.lock',
   './*.js',
   './*.ts',
@@ -14,7 +13,7 @@ const syncGlobs = [
   './.*',
 ];
 const syncWatchGlobs = [
-  '{src,types,sysadmin,patches}/**',
+  '{src,types,sysadmin}/**',
   '*.js',
   '*.ts',
   '*.json',

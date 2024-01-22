@@ -34,7 +34,8 @@ else
 
   # build-essential is needed to build binary packages
   # rsync is used for development
-  apt-get install -y nodejs build-essential rsync --force-yes
+  # pigpio is depended on by raspi-io > raspi-gpio > pigpio
+  apt-get install -y nodejs build-essential rsync pigpio
 fi
 
 npm install --global yarn
