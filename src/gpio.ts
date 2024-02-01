@@ -103,7 +103,16 @@ export async function _addButtonListener({
   onUp: () => unknown;
 }) {
   _withReadyBoard(() => {
-    const button = new Button({ pin });
+    // Since we connect to ground, use a pull-up resistor, which
+    // is also supposed to be slightly better for noise-tolerance:
+    // Our diagram: https://docs.google.com/drawings/d/1mreJUlSr_8Lj_v_qnm54Mb6FJzXbTNlOOgfM4Ys-_sU/edit
+    // Johnny-Five diagram:
+    // https://johnny-five.io/examples/button-pullup/
+    // https://imgur.com/a/XHpiYgp (mirror)
+    //
+    // Why pull-up is better than pull-down:
+    // https://electronics.stackexchange.com/a/405369
+    const button = new Button({ pin, isPullup: true });
     button.on('down', onDown);
     button.on('up', onUp);
   });
@@ -117,7 +126,7 @@ export const meterToPin: { [meter in WaterMeter]: string } = {
   // for a list of all available pins
   // and https://pi4j.com/1.2/pins/model-zerow-rev1.html
   // for a diagram
-  [WaterMeter.seventy]: 'GPIO10',
-  [WaterMeter.seventyTwo]: 'GPIO9',
-  [WaterMeter.seventyFour]: 'GPIO11',
+  [WaterMeter.seventy]: 'GPIO21',
+  [WaterMeter.seventyTwo]: 'GPIO20',
+  [WaterMeter.seventyFour]: 'GPIO16',
 };
