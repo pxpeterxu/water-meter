@@ -3,3 +3,4 @@
 /.eslintcache
 .DS_Store
 /.tsbuildinfo
+/src/config

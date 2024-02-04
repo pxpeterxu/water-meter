@@ -126,7 +126,10 @@ export const meterToPin: { [meter in WaterMeter]: string } = {
   // for a list of all available pins
   // and https://pi4j.com/1.2/pins/model-zerow-rev1.html
   // for a diagram
-  [WaterMeter.seventy]: 'GPIO21',
-  [WaterMeter.seventyTwo]: 'GPIO20',
-  [WaterMeter.seventyFour]: 'GPIO16',
+  //
+  // Keep colors in sync with
+  // https://docs.google.com/drawings/d/1mreJUlSr_8Lj_v_qnm54Mb6FJzXbTNlOOgfM4Ys-_sU/edit
+  [WaterMeter.seventy]: 'GPIO21', // Red
+  [WaterMeter.seventyTwo]: 'GPIO20', // Yellow
+  [WaterMeter.seventyFour]: 'GPIO16', // White
 };

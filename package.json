@@ -6,8 +6,7 @@
   "scripts": {
     "b-node": "babel-node --extensions .ts,.tsx",
     "build": "babel --extensions .ts,.tsx src --out-dir dist && cp -R src/config dist/config",
-    "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx --max-warnings 0 .",
-    "postinstall": "patch-package"
+    "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx --max-warnings 0 ."
   },
   "repository": {
     "type": "git",

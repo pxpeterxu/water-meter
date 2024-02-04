@@ -8,13 +8,20 @@ if [ "$PROCESSOR_ARCHITECTURE" = 'armv6l' ]; then
   # builds no longer exist on ARMv6, which is used by Pi Zeros, so we follow
   # the instructions here to download it from unofficial-builds
   # https://hassancorrigan.com/blog/install-nodejs-on-a-raspberry-pi-zero/
-  command jq &> /dev/null || apt-get install -y jq
-  LATEST_VERSION=$(curl 'https://unofficial-builds.nodejs.org/download/release/index.json' | jq -r '.[] | select(.version | startswith("v'"$NODE_VERSION"'.")) | .version' | head -n 1)
+  command -v jq &> /dev/null || apt-get install -y jq
+  LATEST_VERSION=$(curl --silent 'https://unofficial-builds.nodejs.org/download/release/index.json' | jq -r '.[] | select(.version | startswith("v'"$NODE_VERSION"'.")) | .version' | head -n 1)
 
-  wget "https://unofficial-builds.nodejs.org/download/release/$LATEST_VERSION/node-$LATEST_VERSION-linux-armv6l.tar.xz"
-  tar -xf node-*.tar.xz
-  cp -R node-*/* /usr/local
-  rm -rf node-*
+  INSTALLED_VERSION=$(command -v node &> /dev/null && node --version)
+
+  if [[ "$INSTALLED_VERSION" =~ ^v$NODE_VERSION ]]; then
+    echo 'Latest version of Node.js installed; skipping install'
+  else
+    echo 'Downloading and installing Node.js'
+    wget "https://unofficial-builds.nodejs.org/download/release/$LATEST_VERSION/node-$LATEST_VERSION-linux-armv6l.tar.xz"
+    tar -xf node-*.tar.xz
+    cp -R node-*/* /usr/local
+    rm -rf node-*
+  fi
 else
   # Install Node from nodesource based on https://github.com/nodesource/distributions/tree/69a4558#installation-instructions
   apt-get install -y ca-certificates curl gnupg
@@ -38,4 +45,5 @@ else
   apt-get install -y nodejs build-essential rsync pigpio
 fi
 
-npm install --global yarn
+command -v yarn &> /dev/null || npm install --global yarn
+command -v pm2 &> /dev/null || yarn global add pm2
